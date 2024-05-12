@@ -53,6 +53,7 @@
       wget
       alejandra
       screen
+      mailutils
     ];
   };
 
