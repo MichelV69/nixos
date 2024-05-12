@@ -41,7 +41,10 @@
     isNormalUser = true;
     description = "Michel";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [wget];
+    packages = with pkgs; [
+      wget
+      alejandra
+      ];
   };
 
   # Allow unfree packages
