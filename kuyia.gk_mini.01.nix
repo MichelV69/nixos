@@ -9,8 +9,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./ssh.nix
     ./7965_stpeters_local.net.nix
+    ./firewall.nix
+    ./ssh.nix
     ./kubernetes.nix
   ];
 
@@ -79,7 +80,7 @@
   # networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = true;
+  # networking.firewall.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
