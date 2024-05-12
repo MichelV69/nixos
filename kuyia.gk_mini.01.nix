@@ -13,6 +13,7 @@
     ./firewall.nix
     ./ssh.nix
     ./kubernetes.nix
+    ./janitor.nix
   ];
 
   # Bootloader.
