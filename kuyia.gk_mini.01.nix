@@ -9,12 +9,15 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./ssh.nix
+    ./7965_stpeters_local.net.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  #networking.hostId = "nixmini01";
   networking.hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
   # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
@@ -69,7 +72,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 22 ];
@@ -89,7 +92,6 @@
   programs.nix-ld.enable = true;
 
   networking = {
-    domain = "7965_stpeters.local";
     dhcpcd.enable = false;
     interfaces.enp1s0.ipv4.addresses = [
       {
@@ -97,7 +99,8 @@
         prefixLength = 24;
       }
     ];
-    defaultGateway = "192.168.0.1";
-    nameservers = ["192.168.0.1"];
   };
+  ## services.kubernetes = {
+  ##   roles = ["master" "node"];
+  ## };
 }
