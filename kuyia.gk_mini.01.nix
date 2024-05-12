@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./addSwapFile.nix
     ./7965_stpeters_local.net.nix
     ./wifi.nix
     ./firewall.nix
