@@ -1,21 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
+  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -40,11 +41,11 @@
   users.users.michelv69 = {
     isNormalUser = true;
     description = "Michel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       wget
       alejandra
-      ];
+    ];
   };
 
   # Allow unfree packages
@@ -53,22 +54,22 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  pkgs.nix-ld
-	git
+    pkgs.nix-ld
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-   };
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
- services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 22 ];
@@ -84,6 +85,19 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  # --- going beyond defaults --- 
+  # --- going beyond defaults ---
   programs.nix-ld.enable = true;
+
+  networking = {
+    domain = "7965_stpeters.local";
+    dhcpcd.enable = false;
+    interfaces.enp1s0.ipv4.addresses = [
+      {
+        address = "192.168.0.113";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.0.1";
+    nameservers = ["192.168.0.1"];
+  };
 }
