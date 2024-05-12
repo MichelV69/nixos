@@ -49,6 +49,7 @@
     isNormalUser = true;
     description = "Michel";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       wget
       alejandra
@@ -96,6 +97,7 @@
 
   # --- going beyond defaults ---
   programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
 
   networking = {
     dhcpcd.enable = false;
