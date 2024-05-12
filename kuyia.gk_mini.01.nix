@@ -10,6 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./7965_stpeters_local.net.nix
+    ./wifi.nix
     ./firewall.nix
     ./ssh.nix
     ./kubernetes.nix
@@ -22,7 +23,6 @@
 
   #networking.hostId = "nixmini01";
   networking.hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
-  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
