@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ./ssh.nix
     ./7965_stpeters_local.net.nix
+    ./kubernetes.nix
   ];
 
   # Bootloader.
@@ -100,7 +101,4 @@
       }
     ];
   };
-  ## services.kubernetes = {
-  ##   roles = ["master" "node"];
-  ## };
 }
