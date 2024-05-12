@@ -11,9 +11,9 @@
 }: let
   # When using easyCerts=true the IP Address must resolve to the master on creation.
   # So use simply 127.0.0.1 in that case. Otherwise you will have errors like this https://github.com/NixOS/nixpkgs/issues/59364
-  #kubeMasterIP = "10.1.1.10";
+  # kubeMasterIP = "10.1.1.10";
   kubeMasterIP = "127.0.0.1";
-  kubeMasterHostname = "kube_main_alpha";
+  kubeMasterHostname = "localhost";
   kubeMasterAPIServerPort = 6443;
 in {
   networking = {
@@ -28,9 +28,13 @@ in {
         address = "10.1.1.1";
         prefixLength = 24;
       }
+      {
+        address = "10.1.1.10";
+        prefixLength = 24;
+      }
     ];
     hosts = {
-      "${kubeMasterIP}" = ["${kubeMasterHostname}"];
+      "${kubeMasterIP}" = ["${kubeMasterHostname}" "kube_main_alpha"];
       "10.1.1.11" = ["kube_node_alpha"];
       "10.1.1.12" = ["kube_node_bravo"];
     };
