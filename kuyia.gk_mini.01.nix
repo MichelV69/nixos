@@ -94,7 +94,7 @@
   programs.zsh.enable = true;
 
   networking = {
-    hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
+    hostName = "nix01"; # Define your hostname.
     dhcpcd.enable = false;
     interfaces.enp1s0.ipv4.addresses = [
       {

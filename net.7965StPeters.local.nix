@@ -19,6 +19,6 @@
       "192.168.0.114" = ["nixmini02"];
       "192.168.0.115" = ["nixmini03"];
     };
-    domain = "7965_stpeters.local";
+    domain = "kuyia-gk-mini.7965_stpeters.local";
   };
 }

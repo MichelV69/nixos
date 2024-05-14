@@ -14,7 +14,7 @@
   kubeMasterIP = "127.0.0.1";
   kubeMasterHostname = "localhost";
   #kubeMasterIP = "10.1.1.10";
-  #kubeMasterHostname = "kube_main_alpha";
+  #kubeMasterHostname = "main_alpha.kube";
   kubeMasterAPIServerPort = 6443;
 in {
   networking = {
@@ -35,9 +35,9 @@ in {
       }
     ];
     hosts = {
-      "${kubeMasterIP}" = ["${kubeMasterHostname}" "kube_main_alpha"];
-      "10.1.1.11" = ["kube_node_alpha"];
-      "10.1.1.12" = ["kube_node_bravo"];
+      "${kubeMasterIP}" = ["${kubeMasterHostname}" "main_alpha.kube"];
+      "10.1.1.11" = ["node-alpha.kube"];
+      "10.1.1.12" = ["node-bravo.kube"];
     };
   };
 
@@ -47,20 +47,18 @@ in {
     kubectl
     kubernetes
   ];
-  #-  services.kubernetes = {
-  #-    easyCerts = true;
-  #-    roles = ["master"];
-  #-    masterAddress = kubeMasterHostname;
-  #-    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
-  #-    apiserver = {
-  #-      securePort = kubeMasterAPIServerPort;
-  #-      advertiseAddress = kubeMasterIP;
-  #-    };
-  #-
-  #-    # use coredns
-  #-        addons.dns.enable = true;
-  #-
-  #-    # needed if you use swap
-  #-        kubelet.extraOpts = "--fail-swap-on=false";
-  #-  };
+  services.kubernetes = {
+    easyCerts = true;
+    roles = ["master"];
+    masterAddress = kubeMasterHostname;
+    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
+    apiserver = {
+      securePort = kubeMasterAPIServerPort;
+      advertiseAddress = kubeMasterIP;
+    };
+    # use coredns
+    #- addons.dns.enable = true;
+    # needed if you use swap
+    kubelet.extraOpts = "--fail-swap-on=false";
+  };
 }
