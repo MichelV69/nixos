@@ -41,11 +41,11 @@ in {
   };
 
   # packages for administration tasks
-  #-  environment.systemPackages = with pkgs; [
-  #-    kompose
-  #-    kubectl
-  #-    kubernetes
-  #-  ];
+  environment.systemPackages = with pkgs; [
+    kompose
+    kubectl
+    kubernetes
+  ];
   #-  services.kubernetes = {
   #-    easyCerts = true;
   #-    roles = ["master"];

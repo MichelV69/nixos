@@ -10,7 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./addSwapFile.nix
-    ./7965_stpeters_local.net.nix
+    ./net.7965StPeters.local.nix
     ./wifi.nix
     ./firewall.nix
     ./ssh.nix
@@ -21,13 +21,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  #networking.hostId = "nixmini01";
-  networking.hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -100,6 +93,7 @@
   programs.zsh.enable = true;
 
   networking = {
+    hostName = "kuyia_gk_mini_01_nix"; # Define your hostname.
     dhcpcd.enable = false;
     interfaces.enp1s0.ipv4.addresses = [
       {
