@@ -17,7 +17,7 @@
     resolveLocalQueries = true;
     settings = {
       domain-needed = true;
-      dhcp-range = ["192.168.0.22,192.168.0.88"];
+      dhcp-range = ["192.168.0.22, 192.168.0.88"];
       server = [
         "8.8.8.8"
         "8.8.4.4"
