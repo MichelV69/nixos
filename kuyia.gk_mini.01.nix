@@ -14,6 +14,7 @@
     ./wifi.nix
     ./firewall.nix
     ./ssh.nix
+    ./dns_services.nix
     ./kubernetes.nix
     ./janitor.nix
   ];
