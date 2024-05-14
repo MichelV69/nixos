@@ -19,8 +19,8 @@
       domain-needed = true;
       dhcp-range = ["192.168.0.22, 192.168.0.88"];
       server = [
-        "8.8.8.8"
-        "8.8.4.4"
+        "192.168.0.1" #edge-router
+        "172.105.11.50" #linode server
       ];
     };
     extraConfig = "";
