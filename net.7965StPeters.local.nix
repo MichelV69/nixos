@@ -7,18 +7,21 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  domain = "7965stpeters.local";
+  network_edge_ip = "192.168.0.1";
+in {
   networking = {
-    defaultGateway = "192.168.0.1";
-    nameservers = ["192.168.0.1"];
+    defaultGateway = "${network_edge_ip}";
+    nameservers = ["${network_edge_ip}"];
     hosts = {
       "127.0.0.1" = ["localhost"];
-      "192.168.0.1" = ["router"];
-      "192.168.0.111" = ["fileserver"];
-      "192.168.0.113" = ["nixmini01" "gk_mini01"];
-      "192.168.0.114" = ["nixmini02" "gk_mini02"];
-      "192.168.0.115" = ["nixmini03" "gk_mini03"];
+      "192.168.0.1" = ["router.${domain}"];
+      "192.168.0.111" = ["fileserver.${domain}"];
+      "192.168.0.113" = ["nixmini01.${domain}" "gk_mini01.${domain}"];
+      "192.168.0.114" = ["nixmini02.${domain}" "gk_mini02.${domain}"];
+      "192.168.0.115" = ["nixmini03.${domain}" "gk_mini03.${domain}"];
     };
-    domain = "7965stpeters.local";
+    domain = "${domain}";
   };
 }
