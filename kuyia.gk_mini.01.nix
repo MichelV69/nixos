@@ -17,6 +17,7 @@
     ./dns_services.nix
     ./kubernetes.nix
     ./janitor.nix
+    ./users.nix
   ];
 
   # Bootloader.
@@ -36,20 +37,6 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.michelv69 = {
-    isNormalUser = true;
-    description = "Michel";
-    extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      wget
-      alejandra
-      screen
-      mailutils
-    ];
   };
 
   # Allow unfree packages
