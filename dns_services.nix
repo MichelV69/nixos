@@ -17,7 +17,7 @@
     resolveLocalQueries = true;
     settings = {
       domain-needed = true;
-      dhcp-range = ["192.168.0.22, 192.168.0.88"];
+      dhcp-range = ["192.168.0.100, 192.168.0.199"];
       server = [
         "192.168.0.1" #edge-router
         "172.105.11.50" #linode server
