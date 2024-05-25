@@ -14,8 +14,9 @@
   kubeBuildIP = "127.0.0.1";
   kubeBuildHostname = "localhost";
 
+  domain = "7965stpeters.local";
   kubeMasterIP = "10.1.1.10";
-  kubeMasterHostname = "main_alpha.kube";
+  kubeMasterHostname = "main_alpha.kube.${domain}";
   kubeMasterAPIServerPort = 6443;
 in {
   networking = {
@@ -37,8 +38,8 @@ in {
     ];
     hosts = {
       "${kubeMasterIP}" = ["${kubeMasterHostname}"];
-      "10.1.1.11" = ["node-alpha.kube"];
-      "10.1.1.12" = ["node-bravo.kube"];
+      "10.1.1.11" = ["node-alpha.kube.${domain}"];
+      "10.1.1.12" = ["node-bravo.kube.${domain}"];
     };
   };
 

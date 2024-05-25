@@ -15,7 +15,7 @@
     ./firewall.nix
     ./ssh.nix
     ./dns_services.nix
-    ./kubernetes.nix
+    #    ./kubernetes.nix
     ./janitor.nix
   ];
 
