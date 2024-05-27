@@ -14,7 +14,6 @@
   domain = "7965stpeters.local";
   zone = "kube";
   ip_v4_block = "10.1.1";
-  ip_v4_node_ptr = 10;
 
   kubeBuildIP = "127.0.0.1";
   kubeBuildHostname = "localhost";
@@ -22,19 +21,23 @@
 
   kube_managers = {
     alpha = {
-      name = "alpha.${zone}.${domain}";
-      ip_v4 = "${ip_v4_block}.${toString ip_v4_node_ptr}";
+      name = "alpha_mgr.${zone}.${domain}";
+      ip_v4 = "${ip_v4_block}.10";
     };
-    ip_v4_node_ptr = ip_v4_node_ptr + 1;
     bravo = {
-      name = "bravo.${zone}.${domain}";
-      ip_v4 = "${ip_v4_block}.${toString ip_v4_node_ptr}";
+      name = "bravo_mgr.${zone}.${domain}";
+      ip_v4 = "${ip_v4_block}.11";
     };
   };
 
   kube_workers = {
     alpha = {
-      name = "alpha";
+      name = "alpha_wrk.${zone}.${domain}";
+      ip_v4 = "${ip_v4_block}.20";
+    };
+    bravo = {
+      name = "bravo_wrk.${zone}.${domain}";
+      ip_v4 = "${ip_v4_block}.21";
     };
   };
 in {
@@ -57,8 +60,9 @@ in {
     ];
     hosts = {
       "${kube_managers.alpha.ip_v4}" = ["${kube_managers.alpha.name}"];
-      "10.1.1.11" = ["node-alpha.kube.${domain}"];
-      "10.1.1.12" = ["node-bravo.kube.${domain}"];
+      "${kube_managers.bravo.ip_v4}" = ["${kube_managers.bravo.name}"];
+      "${kube_workers.alpha.ip_v4}" = ["${kube_managers.alpha.name}"];
+      "${kube_workers.bravo.ip_v4}" = ["${kube_managers.bravo.name}"];
     };
   };
 
