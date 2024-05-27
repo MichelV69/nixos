@@ -34,7 +34,9 @@ in {
       packages = with pkgs;
         [
           alejandra
+          fzf
           zinit
+          zoxide
         ]
         ++ common_packages;
     };
