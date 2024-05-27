@@ -8,9 +8,10 @@
   ...
 }: let
   common_packages = with pkgs; [
-    wget
-    screen
     mailutils
+    screen
+    stow
+    wget
   ];
 in {
   users.groups = {
