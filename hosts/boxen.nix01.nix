@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ./disk-config.nix
+    ./systems_library.nix
     ./addSwapFile.nix
     ./net.7965StPeters.local.nix
     ./wifi.nix
