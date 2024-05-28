@@ -15,13 +15,13 @@ in {
   services.openssh = {
     enable = true;
     # Forbid root login through SSH.
-    # settings.PermitRootLogin = "no";
+    settings.PermitRootLogin = "no";
     # Use keys only. Remove if you want to SSH using password (not recommended)
     settings.PasswordAuthentication = false;
   };
 
-  services.openssh.settings.PermitRootLogin =
+  services.openssh.settings.X11Forwarding =
     if (realmCfg.booleanTest)
-    then "yes"
-    else "no";
+    then true
+    else false;
 }

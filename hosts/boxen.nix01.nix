@@ -72,7 +72,7 @@
   programs.nix-ld.enable = true;
   programs.zsh.enable = true;
 
-  StPeters7965.booleanTest = false;
+  StPeters7965.booleanTest = true;
   networking = {
     hostName = "nix01"; # Define your hostname.
     dhcpcd.enable = false;
