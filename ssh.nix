@@ -21,7 +21,7 @@ in {
   };
 
   services.openssh.settings.X11Forwarding =
-    if (realmCfg.booleanTest)
+    if (realmCfg.X11Forwarding)
     then true
     else false;
 }

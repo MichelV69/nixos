@@ -8,26 +8,32 @@
   lib,
   ...
 }: let
-  anExampleDefault = true;
+  trueByDefault = true;
 in {
   options = {};
 
   options.StPeters7965 = with lib; {
-    anExample = lib.mkOption {
+    domain = lib.mkOption {
       type = lib.types.string;
-      default = "an example of an example";
+      default = "7965stpeters.local";
       description = ''
-        This is a test of making options.
-        This doubled single-quote style is essentially HEREDOC for NixOS.
-        See what I mean?
+        Which LAN FQDN we expect to be on.
       '';
     };
 
-    booleanTest = lib.mkOption {
-      type = lib.types.bool;
-      default = anExampleDefault;
+    kubeRole = lib.mkOption {
+      type = lib.types.string;
+      default = "node";
       description = ''
-        a test case to do something elsewhere if true
+        Used to set up what job this box does under kubernetes.
+      '';
+    };
+
+    X11Forwarding = lib.mkOption {
+      type = lib.types.bool;
+      default = trueByDefault;
+      description = ''
+        enables X11Forwarding in SSHD.
       '';
     };
   };

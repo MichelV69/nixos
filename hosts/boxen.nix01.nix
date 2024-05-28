@@ -4,7 +4,8 @@
   ...
 }: {
   # global relam options used outside this file
-  StPeters7965.booleanTest = true;
+  StPeters7965.X11Forwarding = true;
+  StPeters7965.kubeRole = "master";
 
   # other box specific options we can just set here
   # Set your time zone.

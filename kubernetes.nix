@@ -11,7 +11,7 @@
 }: let
   # When using easyCerts=true the IP Address must resolve to the master on creation.
   # So use simply 127.0.0.1 in that case. Otherwise you will have errors like this https://github.com/NixOS/nixpkgs/issues/59364
-  domain = "7965stpeters.local";
+  realmCfg = config.StPeters7965;
   zone = "kube";
   ip_v4_block = "10.1.1";
 
@@ -21,23 +21,27 @@
 
   kube_managers = {
     alpha = {
-      name = "alpha_mgr.${zone}.${domain}";
+      name = "alpha_mgr.${zone}.${realmCfg.domain}";
       ip_v4 = "${ip_v4_block}.10";
     };
     bravo = {
-      name = "bravo_mgr.${zone}.${domain}";
+      name = "bravo_mgr.${zone}.${realmCfg.domain}";
       ip_v4 = "${ip_v4_block}.11";
     };
   };
 
   kube_workers = {
     alpha = {
-      name = "alpha_wrk.${zone}.${domain}";
+      name = "alpha_wrk.${zone}.${realmCfg.domain}";
       ip_v4 = "${ip_v4_block}.20";
     };
     bravo = {
-      name = "bravo_wrk.${zone}.${domain}";
+      name = "bravo_wrk.${zone}.${realmCfg.domain}";
       ip_v4 = "${ip_v4_block}.21";
+    };
+    charlie = {
+      name = "charlie_wrk.${zone}.${realmCfg.domain}";
+      ip_v4 = "${ip_v4_block}.22";
     };
   };
 in {
@@ -61,8 +65,9 @@ in {
     hosts = {
       "${kube_managers.alpha.ip_v4}" = ["${kube_managers.alpha.name}"];
       "${kube_managers.bravo.ip_v4}" = ["${kube_managers.bravo.name}"];
-      "${kube_workers.alpha.ip_v4}" = ["${kube_managers.alpha.name}"];
-      "${kube_workers.bravo.ip_v4}" = ["${kube_managers.bravo.name}"];
+      "${kube_workers.alpha.ip_v4}" = ["${kube_workers.alpha.name}"];
+      "${kube_workers.bravo.ip_v4}" = ["${kube_workers.bravo.name}"];
+      "${kube_workers.charlie.ip_v4}" = ["${kube_workers.charlie.name}"];
     };
   };
 
