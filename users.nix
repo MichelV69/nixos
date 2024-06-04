@@ -38,6 +38,7 @@ in {
           fzf
           zinit
           zoxide
+          gh
         ]
         ++ common_packages;
     };
