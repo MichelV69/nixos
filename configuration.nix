@@ -52,7 +52,7 @@
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   programs.nix-ld.enable = true;
   programs.zsh.enable = true;
