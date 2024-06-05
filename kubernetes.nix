@@ -77,7 +77,7 @@ in {
     apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
     apiserver = {
       securePort = kubeMasterAPIServerPort;
-      advertiseAddress = kube_managers.alpha.ip_v4;
+      advertiseAddress = realManagerIP;
     };
     # use coredns
     addons.dns.enable = true;
