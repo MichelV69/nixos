@@ -44,7 +44,12 @@
     };
   };
 
-  realMasterAddress =
+  realManagerIP =
+    if ("${realmCfg.kubeRole}" == "node")
+    then kubeBuildIP
+    else kube_managers.alpha.ip_v4;
+
+  realManagerName =
     if ("${realmCfg.kubeRole}" == "node")
     then kubeBuildHostname
     else kube_managers.alpha.name;
@@ -68,8 +73,8 @@ in {
   services.kubernetes = {
     easyCerts = true;
     roles = ["${realmCfg.kubeRole}"];
-    masterAddress = realMasterAddress;
-    apiserverAddress = "https://${realMasterAddress}:${toString kubeMasterAPIServerPort}";
+    masterAddress = realManagerIP;
+    apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
     apiserver = {
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = kube_managers.alpha.ip_v4;
