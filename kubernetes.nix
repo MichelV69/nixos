@@ -13,8 +13,7 @@
   # So use simply 127.0.0.1 in that case. Otherwise you will have errors like this https://github.com/NixOS/nixpkgs/issues/59364
   realmCfg = config.StPeters7965;
   zone = "kube";
-  ip_v4_block = "10.1.1";
-
+  ip_v4_block = "192.168.0";
   kubeBuildIP = "127.0.0.1";
   kubeBuildHostname = "localhost";
   kubeMasterAPIServerPort = 6443;
@@ -22,46 +21,35 @@
   kube_managers = {
     alpha = {
       name = "alpha_mgr.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.10";
+      ip_v4 = "${ip_v4_block}.113";
     };
     bravo = {
       name = "bravo_mgr.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.11";
+      ip_v4 = "${ip_v4_block}.114";
     };
   };
 
   kube_workers = {
     alpha = {
       name = "alpha_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.20";
+      ip_v4 = "${ip_v4_block}.120";
     };
     bravo = {
       name = "bravo_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.21";
+      ip_v4 = "${ip_v4_block}.121";
     };
     charlie = {
       name = "charlie_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.22";
+      ip_v4 = "${ip_v4_block}.122";
     };
   };
+
+  realMasterAddress =
+    if ("${realmCfg.kubeRole}" == "node")
+    then kubeBuildHostname
+    else kube_managers.alpha.name;
 in {
   networking = {
-    vlans = {
-      vlan100 = {
-        id = 100;
-        interface = "enp1s0";
-      };
-    };
-    interfaces.vlan100.ipv4.addresses = [
-      {
-        address = "${ip_v4_block}.1";
-        prefixLength = 24;
-      }
-      {
-        address = "${kube_managers.alpha.ip_v4}";
-        prefixLength = 24;
-      }
-    ];
     hosts = {
       "${kube_managers.alpha.ip_v4}" = ["${kube_managers.alpha.name}"];
       "${kube_managers.bravo.ip_v4}" = ["${kube_managers.bravo.name}"];
@@ -79,9 +67,9 @@ in {
   ];
   services.kubernetes = {
     easyCerts = true;
-    roles = ["master"];
-    masterAddress = kubeBuildHostname;
-    apiserverAddress = "https://${kubeBuildHostname}:${toString kubeMasterAPIServerPort}";
+    roles = ["${realmCfg.kubeRole}"];
+    masterAddress = realMasterAddress;
+    apiserverAddress = "https://${realMasterAddress}:${toString kubeMasterAPIServerPort}";
     apiserver = {
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = kube_managers.alpha.ip_v4;

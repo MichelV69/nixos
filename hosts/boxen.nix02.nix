@@ -25,7 +25,7 @@
     dhcpcd.enable = false;
     interfaces.enp1s0.ipv4.addresses = [
       {
-        address = "192.168.0.114";
+        address = "192.168.0.120";
         prefixLength = 24;
       }
     ];
