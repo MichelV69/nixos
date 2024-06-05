@@ -45,14 +45,14 @@
   };
 
   realManagerIP =
-    if ("${realmCfg.kubeRole}" == "node")
-    then kubeBuildIP
-    else kube_managers.alpha.ip_v4;
+    if ("${realmCfg.kubeRole}" != "node")
+    then kube_managers.alpha.ip_v4
+    else kubeBuildIP;
 
   realManagerName =
-    if ("${realmCfg.kubeRole}" == "node")
-    then kubeBuildHostname
-    else kube_managers.alpha.name;
+    if ("${realmCfg.kubeRole}" != "node")
+    then kube_managers.alpha.name
+    else kubeBuildHostname;
 in {
   networking = {
     hosts = {
