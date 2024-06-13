@@ -40,8 +40,6 @@ in {
           zoxide
           gh
           neovim
-          vimPlugins.nvchad
-          vimPlugins.nvchad-ui
         ]
         ++ common_packages;
     };
