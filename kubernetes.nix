@@ -72,6 +72,7 @@ in {
     easyCerts = true;
     roles = ["${realmCfg.kubeRole}"];
     masterAddress = realManagerIP;
+    pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
     apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
     apiserver = {
       securePort = kubeMasterAPIServerPort;
