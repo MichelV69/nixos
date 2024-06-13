@@ -39,6 +39,7 @@ in {
           zinit
           zoxide
           gh
+          neovim
           vimPlugins.nvchad
         ]
         ++ common_packages;
