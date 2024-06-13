@@ -11,46 +11,33 @@
 }: let
   realmCfg = config.StPeters7965;
   zone = "kube";
-  ip_v4_block = "192.168.0";
-  kubeBuildIP = "127.0.0.1";
-  kubeBuildHostname = "localhost";
   kubeMasterAPIServerPort = 6443;
 
   kube_managers = {
     alpha = {
       name = "alpha_mgr.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.113";
+      ip_v4 = "${realmCfg.ip_v4_block}.113";
     };
     bravo = {
       name = "bravo_mgr.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.114";
+      ip_v4 = "${realmCfg.ip_v4_block}.114";
     };
   };
 
   kube_workers = {
     alpha = {
       name = "alpha_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.120";
+      ip_v4 = "${realmCfg.ip_v4_block}.120";
     };
     bravo = {
       name = "bravo_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.121";
+      ip_v4 = "${realmCfg.ip_v4_block}.121";
     };
     charlie = {
       name = "charlie_wrk.${zone}.${realmCfg.domain}";
-      ip_v4 = "${ip_v4_block}.122";
+      ip_v4 = "${realmCfg.ip_v4_block}.122";
     };
   };
-
-  realManagerIP = kube_managers.alpha.ip_v4;
-  #  if ("${realmCfg.kubeRole}" != "node")
-  #  then kube_managers.alpha.ip_v4
-  #  else kubeBuildIP;
-
-  realManagerName = kube_managers.alpha.name;
-  #  if ("${realmCfg.kubeRole}" != "node")
-  #  then kube_managers.alpha.name
-  #  else kubeBuildHostname;
 in {
   networking = {
     hosts = {
@@ -71,14 +58,14 @@ in {
   services.kubernetes = {
     easyCerts = true;
     roles = ["${realmCfg.kubeRole}"];
-    masterAddress = realManagerIP;
+    masterAddress = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
     pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
-    apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
+    apiserverAddress = "https://${realmCfg.myHostName}.${realmCfg.domain}:${toString kubeMasterAPIServerPort}";
     apiserver = {
       extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
-      serviceAccountIssuer = realManagerName;
+      serviceAccountIssuer = "${realmCfg.myHostName}.${realmCfg.domain}";
       securePort = kubeMasterAPIServerPort;
-      advertiseAddress = realManagerIP;
+      advertiseAddress = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
     };
     # use coredns
     addons.dns.enable = true;
