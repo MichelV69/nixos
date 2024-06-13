@@ -75,6 +75,7 @@ in {
     pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
     apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
     apiserver = {
+      extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
       serviceAccountIssuer = realManagerName;
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = realManagerIP;
