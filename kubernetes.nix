@@ -73,7 +73,8 @@ in {
     kubernetes
   ];
   services.kubernetes = {
-    easyCerts = true;
+    #easyCerts = true;
+    easyCerts = false;
     roles = ["${realmCfg.kubeRole}"];
     masterAddress = realManagerIP;
     apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
