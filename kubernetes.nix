@@ -47,7 +47,7 @@
   #  then kube_managers.alpha.ip_v4
   #  else kubeBuildIP;
 
-  realManagerName = kubeBuildHostname;
+  realManagerName = kube_managers.alpha.name;
   #  if ("${realmCfg.kubeRole}" != "node")
   #  then kube_managers.alpha.name
   #  else kubeBuildHostname;
@@ -75,6 +75,7 @@ in {
     pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
     apiserverAddress = "https://${realManagerName}:${toString kubeMasterAPIServerPort}";
     apiserver = {
+      serviceAccountIssuer = realManagerName;
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = realManagerIP;
     };
