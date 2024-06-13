@@ -38,6 +38,9 @@
       ip_v4 = "${realmCfg.ip_v4_block}.122";
     };
   };
+
+  my_fqdn = "${realmCfg.myHostName}.${realmCfg.domain}";
+  my_fullIP = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
 in {
   networking = {
     hosts = {
@@ -58,14 +61,14 @@ in {
   services.kubernetes = {
     easyCerts = true;
     roles = ["${realmCfg.kubeRole}"];
-    masterAddress = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
+    masterAddress = "${my_fullIP}";
     pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
-    apiserverAddress = "https://${realmCfg.myHostName}.${realmCfg.domain}:${toString kubeMasterAPIServerPort}";
+    apiserverAddress = "https://${my_fqdn}:${toString kubeMasterAPIServerPort}";
     apiserver = {
-      extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
-      serviceAccountIssuer = "${realmCfg.myHostName}.${realmCfg.domain}";
+      extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name} ${my_fqdn}"];
+      serviceAccountIssuer = "${my_fqdn}";
       securePort = kubeMasterAPIServerPort;
-      advertiseAddress = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
+      advertiseAddress = "${my_fullIP}";
     };
     # use coredns
     addons.dns.enable = true;
