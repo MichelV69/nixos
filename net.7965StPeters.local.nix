@@ -8,19 +8,23 @@
   pkgs,
   ...
 }: let
-  domain = "7965stpeters.local";
-  network_edge_ip = "192.168.0.1";
+  realmCfg = config.StPeters7965;
+  domain = "${realmCfg.domain}";
+  ip_v4_block = "${realmCfg.ip_v4_block}";
+  network_edge_ip = "${ip_v4_block}.1";
 in {
   networking = {
     defaultGateway = "${network_edge_ip}";
     nameservers = ["${network_edge_ip}"];
     hosts = {
       "127.0.0.1" = ["localhost"];
-      "192.168.0.1" = ["router.${domain}"];
-      "192.168.0.111" = ["fileserver.${domain}"];
-      "192.168.0.113" = ["nixmini01.${domain}" "gk_mini01.${domain}"];
-      "192.168.0.114" = ["nixmini02.${domain}" "gk_mini02.${domain}"];
-      "192.168.0.115" = ["nixmini03.${domain}" "gk_mini03.${domain}"];
+      "${network_edge_ip}" = ["router.${domain}" "edge_local.eastlink.ca"];
+      "${ip_v4_block}.111" = ["fileserver.${domain}" "files.${domain}"];
+      "${ip_v4_block}.113" = ["nixmini01.${domain}" "gk_mini01.${domain}"]; # k8.master
+      "${ip_v4_block}.114" = ["nixmini02.${domain}" "gk_mini02.${domain}"]; # k8.master
+      "${ip_v4_block}.115" = ["nixmini03.${domain}" "gk_mini03.${domain}"]; # k8.node
+      "${ip_v4_block}.116" = ["nixmini04.${domain}" "gk_mini04.${domain}"]; # k8.node
+      "${ip_v4_block}.117" = ["nixmini05.${domain}" "gk_mini05.${domain}"]; # k8.node
     };
     domain = "${domain}";
   };

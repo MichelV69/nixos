@@ -2,10 +2,20 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  realmCfg = config.StPeters7965;
+
+  X11Forwarding = true;
+  kubeRole = "node";
+  myHostName = "nix03";
+  my4xIP = "115";
+  myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
+in {
   # global relam options used outside this file
-  StPeters7965.X11Forwarding = true;
-  StPeters7965.kubeRole = "node";
+  StPeters7965.X11Forwarding = X11Forwarding;
+  StPeters7965.kubeRole = kubeRole;
+  StPeters7965.myHostName = myHostName;
+  StPeters7965.my4xIP = my4xIP;
 
   # other box specific options we can just set here
   # Set your time zone.
@@ -21,11 +31,11 @@
   };
 
   networking = {
-    hostName = "nix02"; # Define your hostname.
+    hostName = myHostName; # Define your hostname.
     dhcpcd.enable = false;
     interfaces.enp1s0.ipv4.addresses = [
       {
-        address = "192.168.0.120";
+        address = myFullIP;
         prefixLength = 24;
       }
     ];
