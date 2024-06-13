@@ -42,7 +42,7 @@
     };
   };
 
-  realManagerIP = kubeBuildIP;
+  realManagerIP = kube_managers.alpha.ip_v4;
   #  if ("${realmCfg.kubeRole}" != "node")
   #  then kube_managers.alpha.ip_v4
   #  else kubeBuildIP;
