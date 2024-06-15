@@ -40,6 +40,9 @@ in {
           zoxide
           gh
           neovim
+          vimPlugins.LazyVim
+          vimPlugins.lazy-nvim
+          vimPlugins.lazygit-nvim
         ]
         ++ common_packages;
     };
