@@ -22,7 +22,7 @@
     ./kubernetes.nix
     ./janitor.nix
     ./users.nix
-    ./nixvim.nix
+    # ./nixvim.nix
   ];
 
   # Bootloader.

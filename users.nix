@@ -39,6 +39,7 @@ in {
           zinit
           zoxide
           gh
+          neovim
         ]
         ++ common_packages;
     };

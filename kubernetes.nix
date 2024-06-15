@@ -7,6 +7,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
   realmCfg = config.StPeters7965;
@@ -41,6 +42,16 @@
 
   my_fqdn = "${realmCfg.myHostName}.${realmCfg.domain}";
   my_fullIP = "${realmCfg.ip_v4_block}.${realmCfg.my4xIP}";
+
+  masterAddress =
+    if (realmCfg.kubeRole == "master")
+    then "${my_fullIP}"
+    else "${kube_managers.alpha.ip_v4_block}";
+
+  apiServer =
+    if (realmCfg.kubeRole == "master")
+    then "https://${my_fqdn}:${toString kubeMasterAPIServerPort}"
+    else "https://${kube_managers.alpha.name}:${toString kubeMasterAPIServerPort}";
 in {
   networking = {
     hosts = {
@@ -58,21 +69,41 @@ in {
     kubectl
     kubernetes
   ];
-  services.kubernetes = {
-    easyCerts = true;
-    roles = ["${realmCfg.kubeRole}"];
-    masterAddress = "${my_fullIP}";
-    pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
-    apiserverAddress = "https://${my_fqdn}:${toString kubeMasterAPIServerPort}";
-    apiserver = {
-      extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}" "${my_fqdn}"];
-      serviceAccountIssuer = "${my_fqdn}";
-      securePort = kubeMasterAPIServerPort;
-      advertiseAddress = "${my_fullIP}";
-    };
-    # use coredns
-    addons.dns.enable = true;
-    # needed if you use swap
-    kubelet.extraOpts = "--fail-swap-on=false";
-  };
+
+  services.kubernetes = lib.mkMerge [
+    (
+      lib.mkIf (realmCfg.kubeRole == "master")
+      {
+        easyCerts = true;
+        roles = ["master"];
+        masterAddress = "${my_fullIP}";
+        pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
+        apiserverAddress = apiServer;
+        apiserver = {
+          extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}" "${my_fqdn}"];
+          serviceAccountIssuer = "${my_fqdn}";
+          securePort = kubeMasterAPIServerPort;
+          advertiseAddress = "${my_fullIP}";
+        };
+      }
+    )
+    (
+      lib.mkIf (realmCfg.kubeRole == "node")
+      {
+        roles = ["node"];
+        masterAddress = kube_managers.alpha.ip_v4;
+        easyCerts = true;
+
+        # point kubelet and other services to kube-apiserver
+        kubelet.kubeconfig.server = apiServer;
+        apiserverAddress = apiServer;
+      }
+    )
+    {
+      # use coredns
+      addons.dns.enable = true;
+      # needed if you use swap
+      kubelet.extraOpts = "--fail-swap-on=false";
+    }
+  ];
 }
