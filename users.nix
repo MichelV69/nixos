@@ -63,6 +63,7 @@ in {
           zinit
           zoxide
           gh
+          micro
         ]
         ++ common_packages
         ++ vim_packages;
