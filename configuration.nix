@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ./disk-config.nix
+    ./trusted_certificates.pki.nix
     ./realm_library.nix
     ./perHost.nix
     ./addSwapFile.nix

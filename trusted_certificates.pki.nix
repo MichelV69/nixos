@@ -1,0 +1,34 @@
+{
+  pkgs,
+  config,
+  ...
+}: {
+  security.pki.certificates = [
+    ''
+      alpha_mgr.kube.7965stpeters.local
+
+      	    	        =========
+      -----BEGIN CERTIFICATE-----
+      MIIDijCCAnKgAwIBAgIUAltvtjRgsadfwWaYOfIXm9CFfNMwDQYJKoZIhvcNAQEL
+      BQAwUjEXMBUGA1UEBxMOYXV0by1nZW5lcmF0ZWQxDjAMBgNVBAoTBU5peE9TMScw
+      JQYDVQQLEx5zZXJ2aWNlcy5rdWJlcm5ldGVzLnBraS5jYVNwZWMwHhcNMjQwNjA1
+      MTcyOTAwWhcNMjUwNjA1MTcyOTAwWjAYMRYwFAYDVQQDEw0xOTIuMTY4LjAuMTEz
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxu6PLRGfPuJbQdqozFoJ
+      P2Oy4r5g7bR8+Vg/kZcSbmgj/bRNPqjg+vf0vQUutGn+d8uyBT9AczRrnA+LDdee
+      zVVY/PW42r9C/LXu7R/QM49ZZ/2+PNF3vta3N77gE49E9lvMQtoBeGT7TrHEuQWR
+      g7JT5jeA1ar0THj/BVUH/K2NKBdTtD3DVb3O6EllATXyaTNcoOWhOtdt0xBXSv0G
+      PUcD2F/lBSYAKd8bf61dKKSEfdJQJNmXPGUOATGgM5sqeWi3W2yOOiu4W8UI6tTo
+      djxCexxIG2NF5vc7duRrd+ePYROcR7CNnmD94cgl1yf1whoR0vUDPINxTzop5WVM
+      BwIDAQABo4GRMIGOMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcD
+      AQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUF1NbNFG7qG9N6MZV
+      /g4ohtsj3z0wHwYDVR0jBBgwFoAUkBmrshE8t5gu4z5mrv61s3ckEOAwDwYDVR0R
+      BAgwBocEwKgAcTANBgkqhkiG9w0BAQsFAAOCAQEAMrfDz0yhVpNpNDFJRRwk0zDq
+      2GyXvHYYiVCuPpcMeI+Z9iCpbUw3Fkw7qBcb50nKuIl48tDkqSf2VBkGZKHFlJGI
+      K3zIOtnotKZ+In94VDUxcOHrZqoWhyMIMlG2JH86T/PEHBLwQjViB5vSz3ovgtx4
+      koTGGHeCTvB7y7VmrG/gslqRAwTl0JvU8BimlZ+bdGTlVWttLE26cO8ZsOXfZ4tk
+      MUjaO0zJ7fEjm6B6cO1V5CDdqi01BpCsqU2KOHO6EkB+8/Vj317NJPf0vMmfsbie
+      XDg2OhEroj+myy2HwrM6ZCkt4964E1cFLE1hdRrr/R5GTe/u0iTqKLQL1BtXJg==
+      -----END CERTIFICATE-----
+    ''
+  ];
+}

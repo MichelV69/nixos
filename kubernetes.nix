@@ -80,7 +80,7 @@ in {
         pki.cfsslAPIExtraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}"];
         apiserverAddress = apiServer;
         apiserver = {
-          extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}" "${my_fqdn}"];
+          extraSANs = ["${kube_managers.alpha.name}" "${kube_managers.bravo.name}" "${my_fqdn}" "${my_fullIP}"];
           serviceAccountIssuer = "${my_fqdn}";
           securePort = kubeMasterAPIServerPort;
           advertiseAddress = "${my_fullIP}";
@@ -93,6 +93,7 @@ in {
         roles = ["node"];
         masterAddress = kube_managers.alpha.ip_v4;
         easyCerts = true;
+        pki.cfsslAPIExtraSANs = ["${kube_workers.alpha.name}" "${kube_workers.bravo.name}" "${kube_workers.charlie.name}"];
 
         # point kubelet and other services to kube-apiserver
         kubelet.kubeconfig.server = apiServer;
