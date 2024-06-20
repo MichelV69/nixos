@@ -42,6 +42,9 @@ in {
           lazygit
           micro
           neovim
+          gcc
+          freetype
+          fontconfig
         ]
         ++ common_packages;
     };
