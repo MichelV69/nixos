@@ -39,6 +39,7 @@ in {
           zinit
           zoxide
           gh
+          lazygit
           micro
           neovim
         ]
