@@ -12,6 +12,7 @@
     screen
     stow
     wget
+    openssl
   ];
 in {
   users.groups = {
@@ -46,8 +47,6 @@ in {
           freetype
           fontconfig
           pkg-config
-          openssl
-          libiconv
         ]
         ++ common_packages;
     };
