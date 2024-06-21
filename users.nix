@@ -45,6 +45,7 @@ in {
           gcc
           freetype
           fontconfig
+          pkg-config
         ]
         ++ common_packages;
     };
