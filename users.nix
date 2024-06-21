@@ -47,6 +47,7 @@ in {
           fontconfig
           pkg-config
           openssl
+          libiconv
         ]
         ++ common_packages;
     };
