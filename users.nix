@@ -46,6 +46,7 @@ in {
           freetype
           fontconfig
           pkg-config
+          openssl
         ]
         ++ common_packages;
     };
