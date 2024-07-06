@@ -17,12 +17,6 @@ in {
   StPeters7965.myHostName = myHostName;
   StPeters7965.my4xIP = my4xIP;
 
-  # packages for this box only
-  #  station_package = with pkgs; [
-  #    nginx
-  #    mysql
-  #  ];
-
   # other box specific options we can just set here
   services.nginx = {
     enable = true;
@@ -30,6 +24,26 @@ in {
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+
+    streamConfig = ''
+      upstream k8s_servers {
+         server 192.168.0.14:6443;
+         server 192.168.0.24:6443;
+         }
+
+      upstream rust_rocket1 {
+        server 127.0.0.1:8000;
+      }
+      server {
+        listen 8080;
+        proxy_pass rust_rocket1;
+      }
+
+      server {
+          listen 6443;
+          proxy_pass k8s_servers;
+         }
+    '';
   };
 
   services.mysql = {
