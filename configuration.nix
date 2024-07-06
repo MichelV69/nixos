@@ -20,7 +20,7 @@
     ./firewall.nix
     ./ssh.nix
     ./dns_services.nix
-    ./kubernetes.nix
+    #./kubernetes.nix  ## -- disabled pending build of nix01 nginx loadbalancer
     ./janitor.nix
     ./users.nix
   ];
