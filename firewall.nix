@@ -14,7 +14,7 @@
   tcp_kublet_reg = 8888;
   tcp_dnsmasq_dns = 53;
   tcp_dnsmasq_dhcp = 76;
-  tcp_rust_rocket_app = 8000;
+  tcp_rust_rocket_app = 8082;
 in {
   networking = {
     firewall.enable = true;

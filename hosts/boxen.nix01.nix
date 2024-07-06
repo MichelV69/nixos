@@ -35,7 +35,7 @@ in {
         server 127.0.0.1:8000;
       }
       server {
-        listen 8080;
+        listen 8082;
         proxy_pass rust_rocket1;
       }
 
