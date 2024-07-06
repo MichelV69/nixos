@@ -18,5 +18,7 @@
   # Auto system update
   system.autoUpgrade = {
     enable = true;
+    dates = "Sunday, 02:00";
+    randomizedDelaySec = "11min";
   };
 }
