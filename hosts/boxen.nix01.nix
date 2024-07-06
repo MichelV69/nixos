@@ -30,6 +30,10 @@ in {
          server 192.168.0.14:6443;
          server 192.168.0.24:6443;
          }
+      server {
+         listen 6443;
+         proxy_pass k8s_servers;
+         }
 
       upstream rust_rocket1 {
         server 127.0.0.1:8000;
@@ -39,10 +43,14 @@ in {
         proxy_pass rust_rocket1;
       }
 
+      upstream maria_db {
+        server 127.0.0.1:3306;
+      }
       server {
-          listen 6443;
-          proxy_pass k8s_servers;
-         }
+        listen 3306;
+        proxy_pass maria_db;
+      }
+
     '';
   };
 

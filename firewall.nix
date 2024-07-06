@@ -9,6 +9,7 @@
   ...
 }: let
   tcp_ssh = 22;
+  tcp_mariaDB = 3306;
   tcp_kubctl = 6443;
   tcp_kubapi = 8080;
   tcp_kublet_reg = 8888;
@@ -18,7 +19,7 @@
 in {
   networking = {
     firewall.enable = true;
-    firewall.allowedTCPPorts = [tcp_ssh tcp_kubctl tcp_kubapi tcp_dnsmasq_dns tcp_kublet_reg tcp_rust_rocket_app];
+    firewall.allowedTCPPorts = [tcp_ssh tcp_kubctl tcp_kubapi tcp_dnsmasq_dns tcp_kublet_reg tcp_rust_rocket_app tcp_mariaDB];
     firewall.allowedUDPPorts = [tcp_dnsmasq_dhcp];
   };
 }
