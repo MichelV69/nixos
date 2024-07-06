@@ -21,4 +21,10 @@
     dates = "Sunday, 02:00";
     randomizedDelaySec = "11min";
   };
+
+  # Make sure that we're not repeating ourselves and repeating ourselves
+  nix.optimise = {
+    automatic = true;
+    dates = ["Sunday, 02:00"];
+  };
 }
