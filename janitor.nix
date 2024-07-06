@@ -11,8 +11,8 @@
   # get ride of DRVs that haven't been looked at in a month
   nix.gc = {
     automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 21d";
+    dates = "Sunday, 01:44";
+    options = "--delete-older-than 11d";
   };
 
   # Auto system update
