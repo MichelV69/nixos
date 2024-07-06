@@ -6,7 +6,7 @@
   realmCfg = config.StPeters7965;
 
   X11Forwarding = true;
-  kubeRole = "master";
+  kubeRole = "none";
   myHostName = "nix01";
   my4xIP = "113";
   myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
@@ -17,7 +17,27 @@ in {
   StPeters7965.myHostName = myHostName;
   StPeters7965.my4xIP = my4xIP;
 
+  # packages for this box only
+  #  station_package = with pkgs; [
+  #    nginx
+  #    mysql
+  #  ];
+
   # other box specific options we can just set here
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+  };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
+
+  # --- unlikely to need to change below ---
   # Set your time zone.
   time.timeZone = "America/Halifax";
 
