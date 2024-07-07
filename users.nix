@@ -14,6 +14,15 @@
     wget
     openssl
   ];
+
+  developer_packages = with pkgs; [
+    pkgs.docker
+    gcc
+    alejandra
+    gh
+    lazygit
+    neovim
+  ];
 in {
   users.groups = {
     staff = {};
@@ -35,20 +44,16 @@ in {
       shell = pkgs.zsh;
       packages = with pkgs;
         [
-          alejandra
           fzf
           zinit
           zoxide
-          gh
-          lazygit
           micro
-          neovim
-          gcc
           freetype
           fontconfig
           pkg-config
         ]
-        ++ common_packages;
+        ++ common_packages
+        ++ developer_packages;
     };
     kat_wilson = {
       isNormalUser = true;
@@ -63,7 +68,8 @@ in {
       packages = with pkgs;
         [
         ]
-        ++ common_packages;
+        ++ common_packages
+        ++ developer_packages;
     };
   };
 }
