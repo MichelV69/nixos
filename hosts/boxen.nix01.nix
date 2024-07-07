@@ -51,7 +51,7 @@ in {
                  }
 
               upstream rust_rocket1 {
-                server 127.0.0.1:9021;
+                server 127.0.0.1:8000;
               }
               server {
                 listen ''
