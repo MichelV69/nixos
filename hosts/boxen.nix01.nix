@@ -22,6 +22,9 @@ in {
     enable = true;
     storageDriver = "btrfs";
     enableOnBoot = true;
+    daemon.settings = {
+      "userland-proxy" = false;
+    };
   };
   services.nginx = {
     enable = true;
