@@ -41,10 +41,10 @@ in {
          }
 
       upstream rust_rocket1 {
-        server 127.0.0.1:8000;
+        server 127.0.0.1:9021;
       }
       server {
-        listen 8082;
+        listen 9021;
         proxy_pass rust_rocket1;
       }
 
