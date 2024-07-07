@@ -25,6 +25,10 @@ in {
   };
   services.nginx = {
     enable = true;
+
+    # listen only on external to avoid proxy conflicts on localhost
+    defaultListenAddresses = ["${myFullIP}"];
+
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
