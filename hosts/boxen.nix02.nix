@@ -1,0 +1,43 @@
+{
+  config,
+  pkgs,
+  ...
+}: let
+  realmCfg = config.StPeters7965;
+
+  X11Forwarding = true;
+  kubeRole = "master";
+  myHostName = "nix02";
+  my4xIP = "114";
+  myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
+in {
+  # global relam options used outside this file
+  StPeters7965.X11Forwarding = X11Forwarding;
+  StPeters7965.kubeRole = kubeRole;
+  StPeters7965.myHostName = myHostName;
+  StPeters7965.my4xIP = my4xIP;
+
+  # other box specific options we can just set here
+  # Set your time zone.
+  time.timeZone = "America/Halifax";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_CA.UTF-8";
+
+  # Configure keymap in X11
+  services.xserver = {
+    xkb.layout = "us";
+    xkb.variant = "";
+  };
+
+  networking = {
+    hostName = myHostName; # Define your hostname.
+    dhcpcd.enable = false;
+    interfaces.enp1s0.ipv4.addresses = [
+      {
+        address = myFullIP;
+        prefixLength = 24;
+      }
+    ];
+  };
+}
