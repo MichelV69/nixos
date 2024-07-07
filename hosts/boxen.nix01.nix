@@ -47,7 +47,7 @@ in {
         server 127.0.0.1:3306;
       }
       server {
-        listen 3306;
+        listen 13306;
         proxy_pass maria_db;
       }
 
