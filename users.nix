@@ -29,6 +29,7 @@ in {
     staff = {};
     developers = {};
     sysadmins = {};
+    docker = {};
   };
 
   users.users = {
@@ -41,7 +42,7 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDNS3lil5pZIcRbnyE97bqxFB55MtkvojJcytHS3hyZ4"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJ0p9LYcnYnqIFNBezlJ8qq5PELUnunK0BcbcZXQ8l+"
       ];
-      extraGroups = ["networkmanager" "wheel" "staff" "developers" "sysadmins"];
+      extraGroups = ["networkmanager" "wheel" "staff" "developers" "sysadmins" "docker"];
       shell = pkgs.zsh;
       packages = with pkgs;
         [
