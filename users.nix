@@ -16,12 +16,13 @@
   ];
 
   developer_packages = with pkgs; [
-    pkgs.docker
-    gcc
     alejandra
+    neovim
+    gcc
     gh
     lazygit
-    neovim
+    docker
+    docker-client
   ];
 in {
   users.groups = {

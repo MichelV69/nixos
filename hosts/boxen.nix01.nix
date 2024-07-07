@@ -18,6 +18,11 @@ in {
   StPeters7965.my4xIP = my4xIP;
 
   # other box specific options we can just set here
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+    enableOnBoot = true;
+  };
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
