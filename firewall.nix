@@ -9,7 +9,7 @@
   ...
 }: let
   tcp_ssh = 22;
-  tcp_mariaDB = 3306;
+  tcp_mariaDB = 13306;
   tcp_kubctl = 6443;
   tcp_kubapi = 8080;
   tcp_kublet_reg = 8888;
