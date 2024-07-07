@@ -23,6 +23,7 @@
     lazygit
     docker
     docker-client
+    ctop
   ];
 in {
   users.groups = {
