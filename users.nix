@@ -54,13 +54,13 @@ in {
           gitui
           zellij
           uutils-coreutils-noprefix
+          pkg-config
+          micro
           #fzf
           #zinit
           #zoxide
-          micro
           #freetype
           #fontconfig
-          #pkg-config
         ]
         ++ common_packages
         ++ developer_packages;
