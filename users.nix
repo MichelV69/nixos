@@ -49,17 +49,18 @@ in {
       packages = with pkgs;
         [
           rustup
+          cargo-binstall
           bottom
           gitui
           zellij
           uutils-coreutils-noprefix
-          fzf
-          zinit
-          zoxide
+          #fzf
+          #zinit
+          #zoxide
           micro
-          freetype
-          fontconfig
-          pkg-config
+          #freetype
+          #fontconfig
+          #pkg-config
         ]
         ++ common_packages
         ++ developer_packages;
