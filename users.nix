@@ -53,7 +53,6 @@ in {
           gitui
           zellij
           uutils-coreutils-noprefix
-          pkg-config
           micro
           #fzf
           #zinit
