@@ -47,6 +47,7 @@ in {
       shell = pkgs.nushellFull;
       packages = with pkgs;
         [
+          nushellPlugins.gstat
           rustup
           cargo-binstall
           bottom
