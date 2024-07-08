@@ -15,7 +15,7 @@
   tcp_kublet_reg = 8888;
   tcp_dnsmasq_dns = 53;
   tcp_dnsmasq_dhcp = 76;
-  tcp_rust_rocket_app1 = 9021;
+  tcp_rust_rocket_tavern = 9021;
 in {
   networking = {
     firewall.enable = true;
@@ -25,7 +25,7 @@ in {
       tcp_kubctl
       tcp_kublet_reg
       tcp_mariaDB
-      # tcp_rust_rocket_app1
+      tcp_rust_rocket_tavern
       tcp_ssh
     ];
     firewall.allowedUDPPorts = [tcp_dnsmasq_dhcp];
