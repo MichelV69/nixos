@@ -40,6 +40,7 @@
     nix-ld
     nix-output-monitor
     llvmPackages.bintools
+    libressl.dev
     libressl
     git
   ];
