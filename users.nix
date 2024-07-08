@@ -12,7 +12,7 @@
     screen
     stow
     wget
-    openssl
+    libressl
   ];
 
   developer_packages = with pkgs; [
