@@ -43,8 +43,8 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJ0p9LYcnYnqIFNBezlJ8qq5PELUnunK0BcbcZXQ8l+"
       ];
       extraGroups = ["networkmanager" "wheel" "staff" "developers" "sysadmins" "docker"];
-      #shell = pkgs.zsh;
-      shell = pkgs.nushellFull;
+      shell = pkgs.zsh;
+      #shell = pkgs.nushellFull;
       packages = with pkgs;
         [
           nushellPlugins.gstat
@@ -56,11 +56,11 @@ in {
           zellij
           uutils-coreutils-noprefix
           micro
-          #fzf
-          #zinit
-          #zoxide
-          #freetype
-          #fontconfig
+          fzf
+          zinit
+          zoxide
+          freetype
+          fontconfig
         ]
         ++ common_packages
         ++ developer_packages;
