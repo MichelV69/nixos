@@ -25,7 +25,7 @@ in {
       tcp_kubctl
       tcp_kublet_reg
       tcp_mariaDB
-      tcp_rust_rocket_app1
+      # tcp_rust_rocket_app1
       tcp_ssh
     ];
     firewall.allowedUDPPorts = [tcp_dnsmasq_dhcp];

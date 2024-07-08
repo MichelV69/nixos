@@ -44,32 +44,20 @@ in {
            server 192.168.0.24:6443;
            }
         server {
-           listen ''
+          listen ''
       + myFullIP
       + ''        :6443;
-                 proxy_pass k8s_servers;
-                 }
-
-              upstream rust_rocket1 {
-                server 127.0.0.1:8001;
-              }
-              server {
-                listen ''
-      + myFullIP
-      + ''        :9021;
-                proxy_pass rust_rocket1;
-              }
-
+                  proxy_pass k8s_servers;
+                  }
               upstream maria_db {
-                server 127.0.0.1:3306;
+                 server 127.0.0.1:3306;
               }
               server {
                 listen ''
       + myFullIP
       + ''        :13306;
                 proxy_pass maria_db;
-              }
-
+                }
       '';
   };
 
