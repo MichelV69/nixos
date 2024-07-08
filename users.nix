@@ -12,7 +12,6 @@
     screen
     stow
     wget
-    libressl
   ];
 
   developer_packages = with pkgs; [

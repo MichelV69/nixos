@@ -37,8 +37,10 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    pkgs.nix-ld
-    pkgs.nix-output-monitor
+    nix-ld
+    nix-output-monitor
+    llvmPackages.bintools
+    libressl
     git
   ];
 
