@@ -48,6 +48,7 @@ in {
       shell = pkgs.nushellFull;
       packages = with pkgs;
         [
+          rustup
           bottom
           gitui
           zellij
