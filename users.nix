@@ -54,6 +54,7 @@ in {
           bottom
           gitui
           zellij
+          ripgrep
           uutils-coreutils-noprefix
           micro
           fzf

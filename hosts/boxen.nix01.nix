@@ -22,9 +22,9 @@ in {
     enable = true;
     storageDriver = "btrfs";
     enableOnBoot = true;
-    # daemon.settings = {
-    #   "userland-proxy" = false;
-    # };
+    daemon.settings = {
+      "userland-proxy" = true;
+    };
   };
   services.nginx = {
     enable = true;
@@ -37,28 +37,32 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    streamConfig =
-      ''
-        upstream k8s_servers {
-           server 192.168.0.14:6443;
-           server 192.168.0.24:6443;
-           }
-        server {
-          listen ''
-      + myFullIP
-      + ''        :6443;
-                  proxy_pass k8s_servers;
-                  }
-              upstream maria_db {
-                 server 127.0.0.1:3306;
-              }
-              server {
-                listen ''
-      + myFullIP
-      + ''        :13306;
-                proxy_pass maria_db;
-                }
-      '';
+    streamConfig = ''
+      upstream rocket_tavern {
+        server 127.0.0.1:9021;
+        }
+      server {
+        listen ${myFullIP}:9021;
+        proxy_pass rocket_tavern;
+        }
+
+      upstream k8s_servers {
+         server 192.168.0.14:6443;
+         server 192.168.0.24:6443;
+         }
+      server {
+        listen ${myFullIP}:6443;
+        proxy_pass k8s_servers;
+        }
+
+      upstream maria_db {
+        server 127.0.0.1:3306;
+        }
+      server {
+        listen ${myFullIP}:13306;
+        proxy_pass maria_db;
+        }
+    '';
   };
 
   services.mysql = {
