@@ -44,11 +44,9 @@ in {
       ];
       extraGroups = ["networkmanager" "wheel" "staff" "developers" "sysadmins" "docker"];
       shell = pkgs.zsh;
-      #shell = pkgs.nushellFull;
       packages = with pkgs;
         [
-          nushellPlugins.gstat
-          nushellPlugins.formats
+          w3m
           rustup
           cargo-binstall
           bottom
