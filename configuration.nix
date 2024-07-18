@@ -22,6 +22,7 @@
     ./dns_services.nix
     ./janitor.nix
     ./users.nix
+    ./k3s.nix
   ];
 
   # Bootloader.
