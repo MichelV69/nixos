@@ -13,8 +13,8 @@ sudo nix --experimental-features "nix-command flakes" \
 mount | grep /mnt	
 sudo nixos-generate-config --no-filesystems --root /mnt
 
-sudo cp -v /tmp/nixInstall/*.nix /mnt/etc/nixos
-sudo cp -v /tmp/nixInstall/hosts/nix??.nix /mnt/etc/nixos/perHost.nix
+sudo cp -v *.nix /mnt/etc/nixos
+sudo cp -v hosts/nix??.nix /mnt/etc/nixos/perHost.nix
 
 cd /mnt/etc/nixos
 sudo nixos-install

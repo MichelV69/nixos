@@ -46,6 +46,7 @@ in {
       shell = pkgs.zsh;
       packages = with pkgs;
         [
+          bat
           w3m
           rustup
           cargo-binstall
