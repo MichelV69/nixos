@@ -54,7 +54,7 @@ in {
 
       (
         lib.mkIf
-        ((kube_role == "agent") && (kube_role == "manager"))
+        ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
         {
           address = kube_myFullIP;
           prefixLength = kube_ip_v4_mask;

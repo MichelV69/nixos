@@ -23,7 +23,7 @@
 in {
   services.k3s = lib.mkMerge [
     (
-      if ((realmCfg.kubeCfg.role == "agent") && (realmCfg.kubeCfg.role == "manager"))
+      if ((realmCfg.kubeCfg.role == "agent") || (realmCfg.kubeCfg.role == "manager"))
       then {
         enable = true;
         extraFlags = "--cluster-cidr ${realmCfg.kubeCfg.ip_v4_block}.0/${realmCfg.kubeCfg.ip_v4_mask}";
