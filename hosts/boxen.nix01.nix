@@ -128,7 +128,7 @@ in {
     (
       if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
       then {
-        "${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}" = ["${kube_myFullIP}"];
+        "${kube_myFullIP}" = ["${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
       }
       else {"" = [""];}
     )
