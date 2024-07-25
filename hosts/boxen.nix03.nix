@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   realmCfg = config.StPeters7965;
@@ -9,14 +10,14 @@
   kubeRole = "node";
   myHostName = "nix03";
   my4xIP = "115";
+  my4xMask = 24;
   myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
 in {
   # global relam options used outside this file
   StPeters7965.X11Forwarding = X11Forwarding;
-  StPeters7965.kubeRole = kubeRole;
   StPeters7965.myHostName = myHostName;
   StPeters7965.my4xIP = my4xIP;
-  StPeters7965.ip_v4_mask = "24";
+  StPeters7965.ip_v4_mask = my4xMask;
 
   # other box specific options we can just set here
   # Set your time zone.

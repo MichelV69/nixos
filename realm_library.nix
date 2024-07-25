@@ -66,7 +66,7 @@ in {
         submodule {
           options = {
             role = mkOption {
-              type = lib.types.optionType;
+              type = lib.types.enum ["none" "proxy" "manager" "agent"];
               default = "none";
               description = ''
                 Used to set up what job this box does under kubernetes.

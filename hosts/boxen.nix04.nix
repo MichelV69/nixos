@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   realmCfg = config.StPeters7965;
@@ -13,7 +14,6 @@
 in {
   # global relam options used outside this file
   StPeters7965.X11Forwarding = X11Forwarding;
-  StPeters7965.kubeRole = kubeRole;
   StPeters7965.myHostName = myHostName;
   StPeters7965.my4xIP = my4xIP;
   StPeters7965.ip_v4_mask = "24";

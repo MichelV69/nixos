@@ -21,9 +21,17 @@
     };
   };
 in {
-  services.k3s = {
-    enable = true;
-    extraFlags = "--cluster-cidr ${realmCfg.kube.ip_v4_block}.0/24";
-    role = "server";
-  };
+  services.k3s = lib.mkMerge [
+    (
+      if ((realmCfg.kubeCfg.role == "agent") && (realmCfg.kubeCfg.role == "manager"))
+      then {
+        enable = true;
+        extraFlags = "--cluster-cidr ${realmCfg.kubeCfg.ip_v4_block}.0/${realmCfg.kubeCfg.ip_v4_mask}";
+        role = " ${realmCfg.kubeCfg.role}";
+      }
+      else {
+        enable = false;
+      }
+    )
+  ];
 }
