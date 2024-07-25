@@ -16,6 +16,7 @@ in {
   StPeters7965.kubeRole = kubeRole;
   StPeters7965.myHostName = myHostName;
   StPeters7965.my4xIP = my4xIP;
+  StPeters7965.ip_v4_mask = "24";
 
   # other box specific options we can just set here
   virtualisation.docker = {
