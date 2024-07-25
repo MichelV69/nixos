@@ -62,4 +62,14 @@ in {
       )
     ];
   };
+
+  networking.hosts = lib.mkMerge [
+    (
+      if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
+      then {
+        "${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}" = ["${kube_myFullIP}"];
+      }
+      else {"" = [""];}
+    )
+  ];
 }

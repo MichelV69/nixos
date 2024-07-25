@@ -73,6 +73,13 @@ in {
                 [none | proxy | manager | agent ]
               '';
             };
+            dns_zone = lib.mkOption {
+              type = lib.types.str;
+              default = "k3s";
+              description = ''
+                What zone is this sitting on for DNS?
+              '';
+            };
             ip_v4_block = lib.mkOption {
               type = lib.types.str;
               default = "192.168.11";

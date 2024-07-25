@@ -7,8 +7,8 @@
   realmCfg = config.StPeters7965;
 
   X11Forwarding = true;
-  myHostName = "nix01";
   my4xIP = "113";
+  myHostName = "nix${my4xIP}";
   my4xMask = 24;
   myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
 
@@ -123,4 +123,14 @@ in {
       )
     ];
   };
+
+  networking.hosts = lib.mkMerge [
+    (
+      if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
+      then {
+        "${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}" = ["${kube_myFullIP}"];
+      }
+      else {"" = [""];}
+    )
+  ];
 }
