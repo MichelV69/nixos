@@ -7,16 +7,16 @@
   realmCfg = config.StPeters7965;
 
   X11Forwarding = true;
-  my4xIP = "113";
+  my4xIP = 113;
   myHostName = "nix${my4xIP}";
   my4xMask = 24;
-  myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
+  myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
 
   kube_role = "proxy";
   kube_ip_v4_block = "192.168.11";
   kube_ip_v4_mask = 24;
-  kube_my4xIP = "001";
-  kube_myFullIP = "${kube_ip_v4_block}.${kube_my4xIP}";
+  kube_my4xIP = 1;
+  kube_myFullIP = "${kube_ip_v4_block}.${toString kube_my4xIP}";
 in {
   # global relam options used outside this file
   StPeters7965.X11Forwarding = X11Forwarding;
@@ -128,7 +128,7 @@ in {
     (
       if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
       then {
-        "${kube_myFullIP}" = ["${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
+        "${kube_myFullIP}" = ["${kube_role}${toString kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
       }
       else {"" = [""];}
     )
