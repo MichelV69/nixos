@@ -62,12 +62,11 @@ in {
     ];
   };
 
-  kube_job = { 
-  if (kube_role == "manager") 
-  then "server"
-  else kube_role
-  };
-  
+  kube_job =
+    if (kube_role == "manager")
+    then "server"
+    else kube_role;
+
   networking.hosts = lib.mkMerge [
     (
       if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
