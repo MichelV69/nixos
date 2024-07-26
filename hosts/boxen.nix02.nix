@@ -7,7 +7,6 @@
   realmCfg = config.StPeters7965;
 
   X11Forwarding = true;
-  kubeRole = "master";
   myHostName = "nix02";
   my4xIP = "114";
   my4xMask = 24;
@@ -63,11 +62,17 @@ in {
     ];
   };
 
+  kube_job = { 
+  if (kube_role == "manager") 
+  then "server"
+  else kube_role
+  };
+  
   networking.hosts = lib.mkMerge [
     (
       if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
       then {
-        "${kube_myFullIP}" = ["${kube_role}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
+        "${kube_myFullIP}" = ["${kube_job}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
       }
       else {"" = [""];}
     )
