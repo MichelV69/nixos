@@ -22,8 +22,8 @@ in {
     };
 
     my4xIP = lib.mkOption {
-      type = lib.types.str;
-      default = "001";
+      type = lib.types.int;
+      default = 1;
       description = ''
         What is the last 3 digits of our unique v4 IP?
       '';
@@ -38,8 +38,8 @@ in {
     };
 
     ip_v4_mask = lib.mkOption {
-      type = lib.types.str;
-      default = "24";
+      type = lib.types.int;
+      default = 24;
       description = ''
         Which Subnet Mask should we use with our ip_v4_block?
       '';
@@ -89,16 +89,16 @@ in {
             };
 
             my4xIP = lib.mkOption {
-              type = lib.types.str;
-              default = "001";
+              type = lib.types.int;
+              default = 1;
               description = ''
                 What is the last 3 digits of our unique v4 IP?
               '';
             };
 
             ip_v4_mask = lib.mkOption {
-              type = lib.types.str;
-              default = "29";
+              type = lib.types.int;
+              default = 29;
               description = ''
                 Which Subnet Mask should we use with our ip_v4_block?
                 (Default is 8 IPs, 192.168.X.0 - 192.168.X.7)

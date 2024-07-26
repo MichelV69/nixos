@@ -8,15 +8,15 @@
 
   X11Forwarding = true;
   myHostName = "nix02";
-  my4xIP = "114";
+  my4xIP = 114;
   my4xMask = 24;
-  myFullIP = "${realmCfg.ip_v4_block}.${my4xIP}";
+  myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
 
   kube_role = "manager";
   kube_ip_v4_block = "192.168.11";
   kube_ip_v4_mask = 24;
-  kube_my4xIP = "002";
-  kube_myFullIP = "${kube_ip_v4_block}.${kube_my4xIP}";
+  kube_my4xIP = 2;
+  kube_myFullIP = "${kube_ip_v4_block}.${toString kube_my4xIP}";
 in {
   # global relam options used outside this file
   StPeters7965.X11Forwarding = X11Forwarding;
@@ -62,16 +62,11 @@ in {
     ];
   };
 
-  kube_job =
-    if (kube_role == "manager")
-    then "server"
-    else kube_role;
-
   networking.hosts = lib.mkMerge [
     (
       if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
       then {
-        "${kube_myFullIP}" = ["${kube_job}${kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
+        "${kube_myFullIP}" = ["${kube_role}${toString kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
       }
       else {"" = [""];}
     )
