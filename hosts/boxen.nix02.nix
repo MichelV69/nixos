@@ -14,7 +14,7 @@
 
   kube_role = "manager";
   kube_ip_v4_block = "192.168.11";
-  kube_ip_v4_mask = 24;
+  kube_ip_v4_mask = 8;
   kube_my4xIP = 2;
   kube_myFullIP = "${kube_ip_v4_block}.${toString kube_my4xIP}";
 in {
@@ -61,14 +61,4 @@ in {
       )
     ];
   };
-
-  networking.hosts = lib.mkMerge [
-    (
-      if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
-      then {
-        "${kube_myFullIP}" = ["${kube_role}${toString kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
-      }
-      else {"" = [""];}
-    )
-  ];
 }
