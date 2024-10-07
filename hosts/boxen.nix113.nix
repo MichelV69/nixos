@@ -8,7 +8,7 @@
 
   X11Forwarding = true;
   my4xIP = 113;
-  myHostName = "nix${my4xIP}";
+  myHostName = "nix${toString my4xIP}";
   my4xMask = 24;
   myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
 
