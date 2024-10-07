@@ -16,6 +16,8 @@
 
   k3s_proxy_ip = "${k3s_ip_v4_block}.113";
   k3s_proxy_port = 6443;
+  k3s_primary_ip = "${k3s_ip_v4_block}.113";
+  k3s_primary_port = 6443;
 in {
   services.k3s = lib.mkMerge [
     (
@@ -56,7 +58,7 @@ in {
       then {
         token = "${k3s_token}";
         clusterInit = false;
-        serverAddr = "https://${k3s_proxy_ip}:${k3s_proxy_port}";
+        serverAddr = "https://${k3s_primary_ip}:${k3s_primary_ip}";
       }
       else {
         # --
