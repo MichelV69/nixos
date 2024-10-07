@@ -61,15 +61,15 @@ in {
       '';
     };
 
-    kubeCfg = lib.mkOption {
+    k3sCfg = lib.mkOption {
       type = with types;
         submodule {
           options = {
             role = mkOption {
-              type = lib.types.enum ["none" "proxy" "manager" "agent"];
+              type = lib.types.enum ["none" "proxy" "primary" "manager" "agent"];
               default = "none";
               description = ''
-                Used to set up what job this box does under kubernetes.
+                Used to set up what job this box does under k3srnetes.
                 [none | proxy | manager | agent ]
               '';
             };
@@ -106,6 +106,6 @@ in {
             };
           };
         }; #submodule
-    }; # kubeCfg
+    }; # k3sCfg
   };
 }

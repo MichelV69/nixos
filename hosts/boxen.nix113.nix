@@ -12,11 +12,11 @@
   my4xMask = 24;
   myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
 
-  kube_role = "proxy";
-  kube_ip_v4_block = "192.168.11";
-  kube_ip_v4_mask = 8;
-  kube_my4xIP = 1;
-  kube_myFullIP = "${kube_ip_v4_block}.${toString kube_my4xIP}";
+  k3s_role = "proxy";
+  k3s_ip_v4_block = "192.168.11";
+  k3s_ip_v4_mask = 8;
+  k3s_my4xIP = 1;
+  k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
 in {
   # global relam options used outside this file
   StPeters7965.X11Forwarding = X11Forwarding;
@@ -24,10 +24,10 @@ in {
   StPeters7965.my4xIP = my4xIP;
   StPeters7965.ip_v4_mask = my4xMask;
 
-  StPeters7965.kubeCfg.role = kube_role;
-  StPeters7965.kubeCfg.ip_v4_block = kube_ip_v4_block;
-  StPeters7965.kubeCfg.ip_v4_mask = kube_ip_v4_mask;
-  StPeters7965.kubeCfg.my4xIP = kube_my4xIP;
+  StPeters7965.k3sCfg.role = k3s_role;
+  StPeters7965.k3sCfg.ip_v4_block = k3s_ip_v4_block;
+  StPeters7965.k3sCfg.ip_v4_mask = k3s_ip_v4_mask;
+  StPeters7965.k3sCfg.my4xIP = k3s_my4xIP;
 
   # other box specific options we can just set here
   virtualisation.docker = {
@@ -59,8 +59,8 @@ in {
         }
 
       upstream k3s_managers {
-         server ${kube_ip_v4_block}.2:6443;
-         server ${kube_ip_v4_block}.5:6443;
+         server ${k3s_ip_v4_block}.2:6443;
+         server ${k3s_ip_v4_block}.5:6443;
          }
       server {
         listen ${myFullIP}:6443;
@@ -68,8 +68,8 @@ in {
         }
 
       upstream k3s_agents {
-         server ${kube_ip_v4_block}.3:6443;
-         server ${kube_ip_v4_block}.4:6443;
+         server ${k3s_ip_v4_block}.3:6443;
+         server ${k3s_ip_v4_block}.4:6443;
          }
       server {
         listen ${myFullIP}:6443;
@@ -115,10 +115,10 @@ in {
 
       (
         lib.mkIf
-        ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
+        ((k3s_role == "agent") || (k3s_role == "manager") || (k3s_role == "proxy"))
         {
-          address = kube_myFullIP;
-          prefixLength = kube_ip_v4_mask;
+          address = k3s_myFullIP;
+          prefixLength = k3s_ip_v4_mask;
         }
       )
     ];

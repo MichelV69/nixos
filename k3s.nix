@@ -5,51 +5,70 @@
   ...
 }: let
   realmCfg = config.StPeters7965;
-  kubeMgrAPIServerPort = 6443;
 
-  kube_role = realmCfg.kubeCfg.role;
-  kube_my4xIP = realmCfg.kubeCfg.my4xIP;
-  kube_ip_v4_block = realmCfg.kubeCfg.ip_v4_block;
-  kube_ip_v4_mask = realmCfg.kubeCfg.ip_v4_mask;
-  kube_myFullIP = "${kube_ip_v4_block}.${toString kube_my4xIP}";
+  k3s_token = "Custody-Fiber3-Spearfish#Antarctic7-Parchment-Patchy!";
 
-  kube_proxies = "${kube_ip_v4_block}.113";
+  k3s_role = realmCfg.k3sCfg.role;
+  k3s_my4xIP = realmCfg.k3sCfg.my4xIP;
+  k3s_ip_v4_block = realmCfg.k3sCfg.ip_v4_block;
+  k3s_ip_v4_mask = realmCfg.k3sCfg.ip_v4_mask;
+  k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
 
-  kube_mgr_proxy = {
-    alpha = {
-      name = "mgr_proxy.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}";
-      ip_v4 = kube_proxies;
-    };
-  };
-  kube_agent_proxy = {
-    alpha = {
-      name = "agent_proxy.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}";
-      ip_v4 = kube_proxies;
-    };
-  };
+  k3s_proxy_ip = "${k3s_ip_v4_block}.113";
+  k3s_proxy_port = 6443;
 in {
   services.k3s = lib.mkMerge [
     (
-      if ((kube_role == "agent") || (kube_role == "manager"))
+      if ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager"))
       then {
         enable = true;
-        extraFlags = "--cluster-cidr ${kube_ip_v4_block}.0/${toString kube_ip_v4_mask}";
-        role =
-          if (kube_role == "manager")
-          then "server"
-          else "${kube_role}";
       }
       else {
         enable = false;
+      }
+    )
+
+    (
+      if (k3s_role == "primary")
+      then {
+        # --- primary "type 1" server ---
+        # - https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/cluster/k3s/docs/USAGE.md#multi-node
+        clusterInit = true;
+      }
+      else {
+        # --- subordinate "type 2" server ---
+        clusterInit = false;
+      }
+    )
+
+    (
+      if ((k3s_role == "primary") || (k3s_role == "manager"))
+      then {
+        role = "server";
+      }
+      else {
+        role = "agent";
+      }
+    )
+
+    (
+      if ((k3s_role == "agent") || (k3s_role == "manager"))
+      then {
+        token = "${k3s_token}";
+        clusterInit = false;
+        serverAddr = "https://${k3s_proxy_ip}:${k3s_proxy_port}";
+      }
+      else {
+        # --
       }
     )
   ];
 
   networking.hosts = lib.mkMerge [
     (
-      if ((kube_role == "agent") || (kube_role == "manager") || (kube_role == "proxy"))
+      if ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager") || (k3s_role == "proxy"))
       then {
-        "${kube_myFullIP}" = ["${kube_role}${toString kube_my4xIP}.${realmCfg.kubeCfg.dns_zone}.${realmCfg.domain}"];
+        "${k3s_myFullIP}" = ["${k3s_role}${toString k3s_my4xIP}.${realmCfg.k3sCfg.dns_zone}.${realmCfg.domain}"];
       }
       else {"" = [""];}
     )

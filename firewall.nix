@@ -8,26 +8,35 @@
   config,
   ...
 }: let
-  tcp_ssh = 22;
-  tcp_mariaDB = 13306;
-  tcp_kubctl = 6443;
-  tcp_kubapi = 8080;
-  tcp_kublet_reg = 8888;
-  tcp_dnsmasq_dns = 53;
-  tcp_dnsmasq_dhcp = 76;
-  tcp_rust_rocket_tavern = 9021;
+  ssh = 22;
+  mariaDB = 3306;
+  #
+  k3s_api = 6443;
+  k3s_etcd_clients = 2379;
+  k3s_etcd_peers = 2380;
+  k3s_flannel = 8472;
+  #
+  dnsmasq_dns = 53;
+  dnsmasq_dhcp = 76;
+  #
+  rust_rocket_tavern = 9021;
+  #
 in {
   networking = {
     firewall.enable = true;
     firewall.allowedTCPPorts = [
-      tcp_dnsmasq_dns
-      tcp_kubapi
-      tcp_kubctl
-      tcp_kublet_reg
-      tcp_mariaDB
-      tcp_rust_rocket_tavern
-      tcp_ssh
+      ssh
+      mariaDB
+      k3s_api
+      k3s_etcd_clients
+      k3s_etcd_peers
+      dnsmasq_dns
+      dnsmasq_dhcp
+      rust_rocket_tavern
     ];
-    firewall.allowedUDPPorts = [tcp_dnsmasq_dhcp];
+    firewall.allowedUDPPorts = [
+      k3s_flannel
+      dnsmasq_dns
+    ];
   };
 }
