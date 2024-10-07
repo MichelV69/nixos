@@ -31,7 +31,8 @@ in {
 
   # other box specific options we can just set here
   virtualisation.docker = {
-    enable = true;
+    ## enable = true;
+    enable = false;
     storageDriver = "btrfs";
     enableOnBoot = true;
     daemon.settings = {
