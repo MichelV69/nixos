@@ -22,6 +22,7 @@
     ./dns_services.nix
     ./janitor.nix
     ./users.nix
+    ./etcd_db.nix
     ## ./k3s.nix
   ];
 
