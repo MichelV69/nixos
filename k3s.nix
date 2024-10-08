@@ -59,7 +59,7 @@ in {
       then {
         token = "${k3s_token}";
         clusterInit = false;
-        serverAddr = "https://${k3s_primary_ip}:${k3s_primary_ip}";
+        serverAddr = "https://${k3s_primary_ip}:${toString k3s_primary_port}";
       }
       else {
         # --
