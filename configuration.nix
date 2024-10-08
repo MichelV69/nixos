@@ -22,8 +22,7 @@
     ./dns_services.nix
     ./janitor.nix
     ./users.nix
-    ##./etcd_db.nix # -- etcd before k3s
-    ./k3s.nix # -- k3s after etcd
+    ./k3s.nix
   ];
 
   # Bootloader.
