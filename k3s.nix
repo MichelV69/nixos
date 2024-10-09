@@ -60,6 +60,9 @@ in {
         token = "${k3s_token}";
         clusterInit = false;
         serverAddr = "https://${k3s_primary_ip}:${toString k3s_primary_port}";
+        extraFlags = toString [
+          "--debug" # Optionally add additional args to k3s
+        ];
       }
       else {
         # --
