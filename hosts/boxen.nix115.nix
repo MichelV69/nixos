@@ -15,7 +15,7 @@
   k3s_role = "agent";
   k3s_ip_v4_block = "192.168.11";
   k3s_ip_v4_mask = 24;
-  k3s_my4xIP = 2;
+  k3s_my4xIP = 5;
   k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
 in {
   # global relam options used outside this file
