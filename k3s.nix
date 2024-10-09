@@ -25,6 +25,9 @@ in {
       if ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager"))
       then {
         enable = true;
+        extraFlags = toString [
+          "--debug --cluster-cidr ${k3s_ip_v4_block}.0/${toString k3s_ip_v4_mask} "
+        ];
       }
       else {
         enable = false;
@@ -60,9 +63,6 @@ in {
         token = "${k3s_token}";
         clusterInit = false;
         serverAddr = "https://${k3s_primary_ip}:${toString k3s_primary_port}";
-        extraFlags = toString [
-          "--debug" # Optionally add additional args to k3s
-        ];
       }
       else {
         # --
