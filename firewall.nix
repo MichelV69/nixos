@@ -19,6 +19,7 @@
   dnsmasq_dns = 53;
   dnsmasq_dhcp = 76;
   #
+  kubernetes_bootcamp = 8080;
   rust_rocket_tavern = 9021;
   #
 in {
@@ -32,6 +33,7 @@ in {
       k3s_etcd_peers
       dnsmasq_dns
       dnsmasq_dhcp
+      kubernetes_bootcamp
       rust_rocket_tavern
     ];
     firewall.allowedUDPPorts = [
