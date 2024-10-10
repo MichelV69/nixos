@@ -56,8 +56,8 @@ in {
 
     streamConfig = ''
       upstream kubernetes_bootcamp {
-         server ${k3s_ip_v4_block}.114:8080;
-         server ${k3s_ip_v4_block}.115:8080;
+         server ${ip_v4_block}.114:8080;
+         server ${ip_v4_block}.115:8080;
       }
       server {
         listen ${myFullIP}:8080;
@@ -73,7 +73,7 @@ in {
         }
 
       upstream k3s_managers {
-         server ${k3s_ip_v4_block}.114:6443;
+         server ${ip_v4_block}.114:6443;
          }
       server {
         listen ${myFullIP}:6443;
@@ -81,8 +81,8 @@ in {
         }
 
       upstream k3s_agents {
-         server ${k3s_ip_v4_block}.114:6443;
-         server ${k3s_ip_v4_block}.115:6443;
+         server ${ip_v4_block}.114:6443;
+         server ${ip_v4_block}.115:6443;
          }
       server {
         listen ${myFullIP}:6443;
