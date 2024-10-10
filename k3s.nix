@@ -59,7 +59,7 @@ in {
       then {
         role = "server";
         extraFlags = toString [
-          "--debug --cluster-cidr=${k3s_ip_v4_block}.0/${toString k3s_ip_v4_mask} "
+          "--debug --cluster-cidr=10.42.0.0/16 --service-cidr=10.43.0.0/16 --flannel-iface enp1s0"
         ];
       }
       else {

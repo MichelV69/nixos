@@ -51,14 +51,14 @@ in {
         prefixLength = my4xMask;
       }
 
-      (
-        lib.mkIf
-        ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager") || (k3s_role == "proxy"))
-        {
-          address = k3s_myFullIP;
-          prefixLength = k3s_ip_v4_mask;
-        }
-      )
+      #(
+      #  lib.mkIf
+      #  ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager") || (k3s_role == "proxy"))
+      #  {
+      #    address = k3s_myFullIP;
+      #    prefixLength = k3s_ip_v4_mask;
+      #  }
+      #)
     ];
   };
 }
