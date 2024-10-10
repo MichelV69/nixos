@@ -35,6 +35,7 @@ in {
       if ((k3s_role == "agent") || (k3s_role == "primary") || (k3s_role == "manager"))
       then {
         enable = true;
+        token = "'${k3s_token}'";
       }
       else {
         enable = false;
@@ -73,7 +74,6 @@ in {
     (
       if ((k3s_role == "agent") || (k3s_role == "manager"))
       then {
-        token = "${k3s_token}";
         clusterInit = false;
         serverAddr = "https://${k3s_primary_ip}:${toString k3s_primary_port}";
       }

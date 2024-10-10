@@ -9,8 +9,9 @@
   X11Forwarding = true;
   my4xIP = 113;
   myHostName = "nix${toString my4xIP}";
+  ip_v4_block = "${realmCfg.ip_v4_block}";
   my4xMask = 24;
-  myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
+  myFullIP = "${ip_v4_block}.${toString my4xIP}";
 
   k3s_role = "proxy";
   k3s_ip_v4_block = "192.168.11";
@@ -25,9 +26,13 @@ in {
   StPeters7965.ip_v4_mask = my4xMask;
 
   StPeters7965.k3sCfg.role = k3s_role;
-  StPeters7965.k3sCfg.ip_v4_block = k3s_ip_v4_block;
-  StPeters7965.k3sCfg.ip_v4_mask = k3s_ip_v4_mask;
-  StPeters7965.k3sCfg.my4xIP = k3s_my4xIP;
+  # StPeters7965.k3sCfg.ip_v4_block = k3s_ip_v4_block;
+  # StPeters7965.k3sCfg.ip_v4_mask = k3s_ip_v4_mask;
+  # StPeters7965.k3sCfg.my4xIP = k3s_my4xIP;
+
+  StPeters7965.k3sCfg.ip_v4_block = ip_v4_block;
+  StPeters7965.k3sCfg.ip_v4_mask = my4xMask;
+  StPeters7965.k3sCfg.my4xIP = my4xIP;
 
   # other box specific options we can just set here
   virtualisation.docker = {
