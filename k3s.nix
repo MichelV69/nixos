@@ -9,15 +9,25 @@
   k3s_token = "Custody-Fiber3-Spearfish#Antarctic7-Parchment-Patchy!";
 
   k3s_role = realmCfg.k3sCfg.role;
-  k3s_my4xIP = realmCfg.k3sCfg.my4xIP;
-  k3s_ip_v4_block = realmCfg.k3sCfg.ip_v4_block;
-  k3s_ip_v4_mask = realmCfg.k3sCfg.ip_v4_mask;
+
+  ## k3s_my4xIP = realmCfg.k3sCfg.my4xIP;
+  ## k3s_ip_v4_block = realmCfg.k3sCfg.ip_v4_block;
+  ## k3s_ip_v4_mask = realmCfg.k3sCfg.ip_v4_mask;
+  ## k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
+  ##
+  ## k3s_proxy_ip = "${k3s_ip_v4_block}.3";
+  ## k3s_proxy_port = 6443;
+  ## k3s_primary_ip = "${k3s_ip_v4_block}.4";
+  ## k3s_primary_port = 6443;
+
+  k3s_my4xIP = realmCfg.my4xIP;
+  k3s_ip_v4_block = realmCfg.ip_v4_block;
+  k3s_ip_v4_mask = realmCfg.ip_v4_mask;
   k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
 
-  k3s_proxy_ip = "${k3s_ip_v4_block}.3";
+  k3s_proxy_ip = "${k3s_ip_v4_block}.113";
   k3s_proxy_port = 6443;
-
-  k3s_primary_ip = "${k3s_ip_v4_block}.4";
+  k3s_primary_ip = "${k3s_ip_v4_block}.114";
   k3s_primary_port = 6443;
 in {
   services.k3s = lib.mkMerge [
@@ -49,7 +59,7 @@ in {
       then {
         role = "server";
         extraFlags = toString [
-          "--debug --cluster-cidr ${k3s_ip_v4_block}.0/${toString k3s_ip_v4_mask} "
+          "--debug --cluster-cidr=${k3s_ip_v4_block}.0/${toString k3s_ip_v4_mask} "
         ];
       }
       else {
