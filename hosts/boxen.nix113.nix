@@ -59,18 +59,6 @@ in {
     recommendedTlsSettings = true;
 
     streamConfig = ''
-      upstream kubernetes_bootcamp {
-         server ${ip_v4_block}.114:8080;
-         server ${ip_v4_block}.115:8080;
-      }
-      server {
-        listen ${myFullIP}:8080;
-        proxy_pass kubernetes_bootcamp;
-        }
-      server {
-        listen localhost:8080;
-        proxy_pass kubernetes_bootcamp;
-        }
 
       upstream rocket_tavern {
         server 127.0.0.1:9021;
@@ -85,6 +73,10 @@ in {
          }
       server {
         listen ${myFullIP}:6443;
+        proxy_pass k3s_managers;
+        }
+      server {
+        listen localhost:8080;
         proxy_pass k3s_managers;
         }
 
