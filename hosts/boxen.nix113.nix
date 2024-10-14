@@ -37,6 +37,7 @@ in {
   # other box specific options we can just set here
   environment.systemPackages = [
     pkgs.kubernetes-helm
+    pkgs.kubectl
   ];
 
   virtualisation.docker = {
