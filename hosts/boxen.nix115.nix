@@ -29,6 +29,8 @@ in {
   StPeters7965.k3sCfg.ip_v4_mask = k3s_ip_v4_mask;
   StPeters7965.k3sCfg.my4xIP = k3s_my4xIP;
 
+  boot.kernel.sysctl."vm.nr_hugepages" = "1440";
+
   # --- unlikely to need to change below ---
   # Set your time zone.
   time.timeZone = "America/Halifax";
