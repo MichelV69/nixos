@@ -24,6 +24,10 @@
     docker-client
     ctop
   ];
+
+  sysadmin_packages = with pkgs; [
+    usbutils
+  ];
 in {
   users.groups = {
     staff = {};
@@ -62,6 +66,7 @@ in {
           freetype
           fontconfig
         ]
+        ++ sysadmin_packages
         ++ common_packages
         ++ developer_packages;
     };
