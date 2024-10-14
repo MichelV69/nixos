@@ -67,6 +67,10 @@ in {
         listen ${myFullIP}:8080;
         proxy_pass kubernetes_bootcamp;
         }
+      server {
+        listen localhost:8080;
+        proxy_pass kubernetes_bootcamp;
+        }
 
       upstream rocket_tavern {
         server 127.0.0.1:9021;
