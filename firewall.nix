@@ -22,6 +22,10 @@
   kubernetes_bootcamp = 8080;
   rust_rocket_tavern = 9021;
   #
+  mayastor_grpc = 10124;
+  mayastor_NVMf1 = 4421;
+  mayastor_NVMf2 = 8420;
+  #
 in {
   networking = {
     firewall.enable = true;
@@ -35,6 +39,9 @@ in {
       dnsmasq_dhcp
       kubernetes_bootcamp
       rust_rocket_tavern
+      mayastor_grpc
+      mayastor_NVMf1
+      mayastor_NVMf2
     ];
     firewall.allowedUDPPorts = [
       k3s_flannel
