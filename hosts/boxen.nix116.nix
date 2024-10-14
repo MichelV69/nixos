@@ -7,7 +7,7 @@
   realmCfg = config.StPeters7965;
 
   X11Forwarding = true;
-  my4xIP = 115;
+  my4xIP = 116;
   myHostName = "nix${toString my4xIP}";
   my4xMask = 24;
   myFullIP = "${realmCfg.ip_v4_block}.${toString my4xIP}";
@@ -15,7 +15,7 @@
   k3s_role = "agent";
   k3s_ip_v4_block = "192.168.11";
   k3s_ip_v4_mask = 24;
-  k3s_my4xIP = 5;
+  k3s_my4xIP = 6;
   k3s_myFullIP = "${k3s_ip_v4_block}.${toString k3s_my4xIP}";
 in {
   # global relam options used outside this file
