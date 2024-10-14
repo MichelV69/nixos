@@ -77,7 +77,7 @@ in {
         proxy_pass k3s_managers;
         }
       server {
-        listen localhost:8080;
+        listen localhost:6443;
         proxy_pass k3s_managers;
         }
 
