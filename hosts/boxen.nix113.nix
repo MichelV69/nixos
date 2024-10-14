@@ -35,6 +35,10 @@ in {
   StPeters7965.k3sCfg.my4xIP = my4xIP;
 
   # other box specific options we can just set here
+  environment.systemPackages = [
+    pkgs.kubernetes-helm
+  ];
+
   virtualisation.docker = {
     enable = true;
     storageDriver = "btrfs";
