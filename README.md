@@ -1,5 +1,6 @@
 # NIXOS
-## The Adventure Begins 
+
+## The Adventure Begins
 
 ## Commands Used to Build
 
@@ -7,10 +8,10 @@
 
 cd "/run/media/USB_B650a/Nix stuff/"
 sudo nix --experimental-features "nix-command flakes" \
-	run github:nix-community/disko -- \
-	--mode disko /tmp/nixInstall/disk-config.nix
+ run github:nix-community/disko -- \
+ --mode disko /tmp/nixInstall/disk-config.nix
 
-mount | grep /mnt	
+mount | grep /mnt
 sudo nixos-generate-config --no-filesystems --root /mnt
 
 sudo cp -v *.nix /mnt/etc/nixos
@@ -21,4 +22,3 @@ sudo nixos-install
 reboot
 
 ```
-
