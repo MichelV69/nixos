@@ -46,6 +46,9 @@ in {
     firewall.allowedUDPPorts = [
       k3s_flannel
       dnsmasq_dns
+      mayastor_grpc
+      mayastor_grpc
+      mayastor_grpc
     ];
   };
 }
