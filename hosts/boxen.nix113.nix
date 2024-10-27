@@ -71,9 +71,15 @@ in {
 
       upstream k3s_managers {
          server ${ip_v4_block}.114:6443;
+         server ${ip_v4_block}.114:10124;
+         server ${ip_v4_block}.114:8420;
+         server ${ip_v4_block}.114:4421;
          }
       server {
         listen ${myFullIP}:6443;
+        listen ${myFullIP}:10124;
+        listen ${myFullIP}:8420;
+        listen ${myFullIP}:4421;
         proxy_pass k3s_managers;
         }
       server {
