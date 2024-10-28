@@ -84,6 +84,9 @@ in {
         }
       server {
         listen localhost:6443;
+        listen localhost:10124;
+        listen localhost:8420;
+        listen localhost:4421;
         proxy_pass k3s_managers;
         }
 
